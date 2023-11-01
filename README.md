@@ -1,8 +1,11 @@
 # log
 [![CMake](https://github.com/Jacob-C-Smith/log/actions/workflows/cmake.yml/badge.svg)](https://github.com/Jacob-C-Smith/log/actions/workflows/cmake.yml)
 
- Log errors, warnings, and information with pretty printing 
-
+ Log errors, warnings, and information with pretty printing
+  
+  
+ > 0 [Try it](#try-it)
+ >
  > 1 [Download](#download)
  >
  > 2 [Build](#build)
@@ -13,9 +16,10 @@
  >
  > 4 [Definitions](#definitions)
  >
- >> 4.1 [Type definitions](#type-definitions)
- >>
- >> 4.2 [Function definitions](#function-definitions)
+ >> 4.1 [Function definitions](#function-definitions)
+
+## Try it
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Jacob-C-Smith/log?quickstart=1)
 
  ## Download
  To download log, execute the following command
