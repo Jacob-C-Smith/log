@@ -1,0 +1,3 @@
+[ERROR] This is an error
+[WARNING] This is a warning
+[INFO] This is some info
