@@ -176,3 +176,89 @@ int log_info ( const char *const format, ... )
         }
     }
 }
+
+int log_pass ( const char *const format, ... )
+{
+
+    // Argument check
+    if ( format == (void *) 0 ) goto no_format;
+
+    // Initialized data
+    va_list list;
+
+    // Use the varadic argument list in vprintf call
+    va_start(list, format);
+
+    // Uses ANSI terminal escapes to set the color to green,
+    if ( log_with_ansi_color ) printf("\033[92m");
+    
+    // Print the info
+    vfprintf(log_file, format, list);
+
+    // Restore the color.
+    if ( log_with_ansi_color ) printf("\033[0m");
+
+    // Done with variadic list
+    va_end(list);
+
+    // Success
+    return 1;
+
+    // Error handling
+    {
+
+        // Argument errors
+        {
+            no_format:
+                #ifndef NDEBUG
+                    printf("[log] Null pointer provided for parameter \"format\" in call to function \"%s\"\n", __FUNCTION__);
+                #endif
+
+                // Error
+                return 0;
+        }
+    }
+}
+
+int log_fail ( const char *const format, ... )
+{
+
+    // Argument check
+    if ( format == (void *) 0 ) goto no_format;
+
+    // Initialized data
+    va_list list;
+
+    // Use the varadic argument list in vprintf call
+    va_start(list, format);
+
+    // Uses ANSI terminal escapes to set the color to red,
+    if ( log_with_ansi_color ) printf("\033[41m");
+    
+    // Print the info
+    vfprintf(log_file, format, list);
+
+    // Restore the color.
+    if ( log_with_ansi_color ) printf("\033[0m");
+
+    // Done with variadic list
+    va_end(list);
+
+    // Success
+    return 1;
+
+    // Error handling
+    {
+
+        // Argument errors
+        {
+            no_format:
+                #ifndef NDEBUG
+                    printf("[log] Null pointer provided for parameter \"format\" in call to function \"%s\"\n", __FUNCTION__);
+                #endif
+
+                // Error
+                return 0;
+        }
+    }
+}

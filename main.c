@@ -21,6 +21,12 @@ int main ( int argc, const char* argv[] )
     // Log some info
     log_info("[INFO] This is some info\n");
 
+    // Log a passing test
+    log_pass("[PASS] This is a passing test\n");
+
+    // Log a failing test
+    log_fail("[FAIL] This is a failing test\n");
+
     // Success
     return EXIT_SUCCESS;
 

@@ -47,6 +47,8 @@ DLLEXPORT int log_init ( const char *const path, bool ansi_color );
  *
  * @sa log_warning
  * @sa log_info
+ * @sa log_pass
+ * @sa log_fail
  *
  * @return 1 on success, 0 on error
  */
@@ -60,6 +62,8 @@ DLLEXPORT int log_error ( const char *const format, ... );
  *
  * @sa log_error
  * @sa log_info
+ * @sa log_pass
+ * @sa log_fail
  *
  * @return 1 on success, 0 on error
  */
@@ -73,7 +77,39 @@ DLLEXPORT int log_warning ( const char *const format, ... );
  *
  * @sa log_error
  * @sa log_warning
+ * @sa log_pass
+ * @sa log_fail
  *
  * @return 1 on success, 0 on error
  */
 DLLEXPORT int log_info ( const char *const format, ... );
+
+/** !
+ *  Log a passing test
+ *
+ * @param format : printf format parameter
+ * @param ...    : Additional arguments
+ *
+ * @sa log_error
+ * @sa log_warning
+ * @sa log_info
+ * @sa log_fail
+ *
+ * @return 1 on success, 0 on error
+ */
+DLLEXPORT int log_pass ( const char *const format, ... );
+
+/** !
+ *  Log a failing test
+ *
+ * @param format : printf format parameter
+ * @param ...    : Additional arguments
+ *
+ * @sa log_error
+ * @sa log_warning
+ * @sa log_info
+ * @sa log_pass
+ *
+ * @return 1 on success, 0 on error
+ */
+DLLEXPORT int log_fail ( const char *const format, ... );
