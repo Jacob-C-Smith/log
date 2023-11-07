@@ -189,8 +189,16 @@ int log_pass ( const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
+    // Uses ANSI terminal escapes to set the color to green
+    if ( log_with_ansi_color ) printf("\033[42m");
+
+    fprintf(log_file, "[PASS]");
+
+    // Restore the color.
+    if ( log_with_ansi_color ) printf("\033[0m");
+
     // Uses ANSI terminal escapes to set the color to green,
-    if ( log_with_ansi_color ) printf("\033[92m");
+    if ( log_with_ansi_color ) printf(" \033[92m");
     
     // Print the info
     vfprintf(log_file, format, list);
@@ -234,7 +242,15 @@ int log_fail ( const char *const format, ... )
 
     // Uses ANSI terminal escapes to set the color to red,
     if ( log_with_ansi_color ) printf("\033[41m");
-    
+
+    fprintf(log_file, "[FAIL]");
+
+    // Restore the color.
+    if ( log_with_ansi_color ) printf("\033[0m");
+
+    // Uses ANSI terminal escapes to set the color to red,
+    if ( log_with_ansi_color ) printf(" \033[91m");
+
     // Print the info
     vfprintf(log_file, format, list);
 
