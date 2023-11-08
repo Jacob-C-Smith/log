@@ -27,6 +27,9 @@ int main ( int argc, const char* argv[] )
     // Log a failing test
     log_fail("This is a failing test\n");
 
+    // Log a scenario
+    log_scenario("This is a test scenario\n");
+
     // Success
     return EXIT_SUCCESS;
 

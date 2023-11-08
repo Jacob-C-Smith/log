@@ -23,7 +23,10 @@ int log_init ( const char *const path, bool ansi_color )
 
     // Error check
     if ( log_file == (void *) 0 ) goto no_log_file;
-
+    
+    // Flush standard out
+    fflush(stdout);
+    
     // Success
     return 1;
 
@@ -34,7 +37,10 @@ int log_init ( const char *const path, bool ansi_color )
         
         // ANSI color flag
         log_with_ansi_color = ansi_color;
-        
+
+        // Flush standard out
+        fflush(stdout);
+
         // Success
         return 1;
 
@@ -190,7 +196,7 @@ int log_pass ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to green
-    if ( log_with_ansi_color ) printf("\033[42m");
+    if ( log_with_ansi_color ) printf("\033[42m\033[1m");
 
     fprintf(log_file, "[PASS]");
 
@@ -241,7 +247,7 @@ int log_fail ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to red,
-    if ( log_with_ansi_color ) printf("\033[41m");
+    if ( log_with_ansi_color ) printf("\033[41m\033[1m");
 
     fprintf(log_file, "[FAIL]");
 
@@ -250,6 +256,51 @@ int log_fail ( const char *const format, ... )
 
     // Uses ANSI terminal escapes to set the color to red,
     if ( log_with_ansi_color ) printf(" \033[91m");
+
+    // Print the info
+    vfprintf(log_file, format, list);
+
+    // Restore the color.
+    if ( log_with_ansi_color ) printf("\033[0m");
+
+    // Done with variadic list
+    va_end(list);
+
+    // Success
+    return 1;
+
+    // Error handling
+    {
+
+        // Argument errors
+        {
+            no_format:
+                #ifndef NDEBUG
+                    printf("[log] Null pointer provided for parameter \"format\" in call to function \"%s\"\n", __FUNCTION__);
+                #endif
+
+                // Error
+                return 0;
+        }
+    }
+}
+
+int log_scenario ( const char *const format, ... )
+{
+
+    // Argument check
+    if ( format == (void *) 0 ) goto no_format;
+
+    // Initialized data
+    va_list list;
+
+    // Use the varadic argument list in vprintf call
+    va_start(list, format);
+
+    // Uses ANSI terminal escapes to set the color to red,
+    if ( log_with_ansi_color ) printf("\033[96m\033[1m\033[4m");
+
+    fprintf(log_file, "Scenario: ");
 
     // Print the info
     vfprintf(log_file, format, list);
