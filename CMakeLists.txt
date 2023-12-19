@@ -1,5 +1,5 @@
-﻿# Need CMake 3.0
-cmake_minimum_required (VERSION 3.0)
+﻿# Need CMake 3.28
+cmake_minimum_required (VERSION 3.28.0)
 
 # This is the name of the repository
 project ("log")
@@ -23,16 +23,22 @@ if ( NOT "${HAS_LOG}")
     # Log
     message("[log] Adding log project")
 
+    # Set the include directory
+    set (LOG_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
+
     # Let any parent project know that it has the log project
-    set(HAS_LOG true PARENT_SCOPE)
+    if(NOT PROJECT_IS_TOP_LEVEL)
+        set(HAS_LOG true PARENT_SCOPE)
+        set(LOG_INCLUDE_DIR ${LOG_INCLUDE_DIR} PARENT_SCOPE)
+    endif()
 endif()
 
 # Add source to this project's executable.
 add_executable(log_example "main.c")
 add_dependencies(log_example log)
-target_include_directories(log_example PUBLIC include include/log)
+target_include_directories(log_example PUBLIC ${LOG_INCLUDE_DIR})
 target_link_libraries(log_example log)
 
 # Add source to the library
 add_library(log SHARED "log.c")
-target_include_directories(log PUBLIC include include/log)
+target_include_directories(log PUBLIC ${LOG_INCLUDE_DIR})
