@@ -1,4 +1,4 @@
-# log <img src="https://icons.g10.app/log.png" alt="sync" width="32"/>  
+# log 
 [![CMake](https://github.com/Jacob-C-Smith/log/actions/workflows/cmake.yml/badge.svg)](https://github.com/Jacob-C-Smith/log/actions/workflows/cmake.yml)
 
  Log errors, warnings, and information with pretty printing
