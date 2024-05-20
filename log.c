@@ -9,11 +9,16 @@
 // Headers
 #include <log/log.h>
 
+// Data
 static FILE *log_file = 0;
-static bool log_with_ansi_color = false;
+static bool  log_with_ansi_color = false;
+static bool  initialized = false;
 
 void log_init ( void )
 {
+
+    // State check
+    if ( initialized == true ) return;
 
     // Log to standard out
     log_file = stdout;
@@ -24,16 +29,9 @@ void log_init ( void )
     // Flush standard out
     fflush(stdout);
 
-    // Done
-    return;
-}
+    // Set the initialized flag
+    initialized = true;
 
-void log_exit ( void )
-{
-
-    // Close the log file
-    fclose(log_file);
-    
     // Done
     return;
 }
@@ -351,4 +349,20 @@ int log_scenario ( const char *const format, ... )
                 return 0;
         }
     }
+}
+
+void log_exit ( void )
+{
+
+    // State check
+    if ( initialized == false ) return;
+
+    // Close the log file
+    fclose(log_file);
+    
+    // Clear the initialized flag
+    initialized = false;
+
+    // Done
+    return;
 }

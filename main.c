@@ -8,7 +8,7 @@
 // Entry point
 int main ( int argc, const char* argv[] )
 {
-
+    
     // Log an error
     log_error("[ERROR] This is an error\n");
 
