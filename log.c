@@ -12,30 +12,7 @@
 static FILE *log_file = 0;
 static bool log_with_ansi_color = false;
 
-<<<<<<< HEAD
-/** !
- * This gets called when linking the shared object
- * 
- * @param void
- * 
- * @return void
- */
-void init ( void ) __attribute__((constructor));
-
-void init ( void ) __attribute__((constructor))
-{
-
-    // Initialize log on standard out with ANSI colors
-    log_init(0, true);
-
-    // Done
-    return;
-}
-
-void close_log_file ( void )
-=======
 void log_init ( void )
->>>>>>> cc56252efe769c6d3a44e49a12cd96c5cfe82441
 {
 
     // Log to standard out
