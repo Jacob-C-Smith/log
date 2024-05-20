@@ -25,9 +25,20 @@
 
 // Initializer
 /** !
- *  Initialize the log library
+ * This gets called at runtime before main. By default, log to standard out 
+ * with ANSI color coding 
+ * 
+ * @param void
+ * 
+ * @return void
+ */
+DLLEXPORT void log_init ( void ) __attribute__((constructor));
+
+// State
+/** !
+ *  Update the log file and color coding flag
  *
- * @param path path to the log file if not null pointer else logs to standard out
+ * @param path       path to the log file if not null pointer else log to standard out
  * @param ansi_color color coded logs if true else plain
  *
  * @sa log_error
@@ -39,7 +50,7 @@
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_init ( const char *const path, bool ansi_color );
+DLLEXPORT int log_update ( const char *const path, bool ansi_color );
 
 // Debug logging
 /** !
@@ -137,3 +148,13 @@ DLLEXPORT int log_fail ( const char *const format, ... );
  * @return 1 on success, 0 on error
  */
 DLLEXPORT int log_scenario ( const char *const format, ... );
+
+// Cleanup
+/** !
+ * This gets called after main
+ * 
+ * @param void
+ * 
+ * @return void
+ */
+DLLEXPORT void log_exit ( void ) __attribute__((destructor));

@@ -12,17 +12,33 @@
 static FILE *log_file = 0;
 static bool log_with_ansi_color = false;
 
-void close_log_file ( void )
+void log_init ( void )
 {
 
-    // Close the log file
-    fclose(log_file);
+    // Log to standard out
+    log_file = stdout;
+    
+    // ANSI color flag
+    log_with_ansi_color = true;
+    
+    // Flush standard out
+    fflush(stdout);
 
     // Done
     return;
 }
 
-int log_init ( const char *const path, bool ansi_color )
+void log_exit ( void )
+{
+
+    // Close the log file
+    fclose(log_file);
+    
+    // Done
+    return;
+}
+
+int log_update ( const char *const path, bool ansi_color )
 {
 
     // Argument check
@@ -33,9 +49,6 @@ int log_init ( const char *const path, bool ansi_color )
 
     // Error check
     if ( log_file == (void *) 0 ) goto no_log_file;
-
-    // Close the file before the process ternubates
-    atexit(close_log_file);
 
     // Success
     return 1;

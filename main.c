@@ -9,9 +9,6 @@
 int main ( int argc, const char* argv[] )
 {
 
-    // Initialize log
-    if ( log_init(0, true) == 0 ) goto failed_to_initialize_log;
-
     // Log an error
     log_error("[ERROR] This is an error\n");
 
@@ -21,14 +18,14 @@ int main ( int argc, const char* argv[] )
     // Log some info
     log_info("[INFO] This is some info\n");
 
+    // Log a scenario
+    log_scenario("This is a test scenario\n");
+
     // Log a passing test
     log_pass("This is a passing test\n");
 
     // Log a failing test
     log_fail("This is a failing test\n");
-
-    // Log a scenario
-    log_scenario("This is a test scenario\n");
 
     // Success
     return EXIT_SUCCESS;
