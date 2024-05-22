@@ -9,6 +9,10 @@
 int main ( int argc, const char* argv[] )
 {
     
+    // Suppress compiler warnings
+    (void) argc;
+    (void) argv;
+
     // Log an error
     log_error("[ERROR] This is an error\n");
 
@@ -29,15 +33,4 @@ int main ( int argc, const char* argv[] )
 
     // Success
     return EXIT_SUCCESS;
-
-    // Error handling
-    {
-        failed_to_initialize_log:
-
-            // Write an error message to standard out
-            printf("Error: Failed to initialize log!\n");
-
-            // Error
-            return EXIT_FAILURE;
-    }
 }
