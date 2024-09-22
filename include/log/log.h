@@ -1,9 +1,9 @@
 ﻿/** !
+ * Include header for log library
+ * 
  * @file log/log.h 
  * 
  * @author Jacob Smith
- * 
- * Include header for log library
  */
 
 // Include guard
@@ -22,6 +22,18 @@
 #else
 #define DLLEXPORT
 #endif
+
+enum log_color_e
+{
+    black   = 30,
+    red     = 31,
+    green   = 32,
+    yellow  = 33,
+    blue    = 34,
+    magenta = 35,
+    cyan    = 36,
+    gray    = 37,
+};
 
 // Initializer
 /** !
@@ -148,6 +160,23 @@ DLLEXPORT int log_fail ( const char *const format, ... );
  * @return 1 on success, 0 on error
  */
 DLLEXPORT int log_scenario ( const char *const format, ... );
+
+/** !
+ *  Log with user defined colors
+ *
+ * @param 
+ * @param format : printf format parameter
+ * @param ...    : Additional arguments
+ *
+ * @sa log_error
+ * @sa log_warning
+ * @sa log_info
+ * @sa log_pass
+ * @sa log_fail
+ *
+ * @return 1 on success, 0 on error
+ */
+DLLEXPORT int log_colorful ( enum log_color_e color, const char *const format, ... );
 
 // Cleanup
 /** !

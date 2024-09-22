@@ -31,6 +31,16 @@ int main ( int argc, const char* argv[] )
     // Log a failing test
     log_fail("This is a failing test\n");
 
+    // Log with colors
+    log_colorful(black  , "Hello, World!\n");
+    log_colorful(red    , "Hello, World!\n");
+    log_colorful(green  , "Hello, World!\n");
+    log_colorful(yellow , "Hello, World!\n");
+    log_colorful(blue   , "Hello, World!\n");
+    log_colorful(magenta, "Hello, World!\n");
+    log_colorful(cyan   , "Hello, World!\n");
+    log_colorful(gray   , "Hello, World!\n");
+
     // Success
     return EXIT_SUCCESS;
 }
