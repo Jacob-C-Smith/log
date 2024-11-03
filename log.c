@@ -86,7 +86,7 @@ int log_error ( const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the color to red
     if ( log_with_ansi_color ) printf("\033[91m");
     
     // Print the error
@@ -129,7 +129,7 @@ int log_warning ( const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the color to yellow
     if ( log_with_ansi_color ) printf("\033[93m");
     
     // Print the warning
@@ -172,7 +172,7 @@ int log_info ( const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the color to light blue,
     if ( log_with_ansi_color ) printf("\033[94m");
     
     // Print the info
@@ -223,7 +223,7 @@ int log_pass ( const char *const format, ... )
     // Restore the color.
     if ( log_with_ansi_color ) printf("\033[0m");
 
-    // Uses ANSI terminal escapes to set the color to green,
+    // Uses ANSI terminal escapes to set the color to green
     if ( log_with_ansi_color ) printf(" \033[92m");
     
     // Print the info
@@ -266,7 +266,7 @@ int log_fail ( const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the background color to red 
     if ( log_with_ansi_color ) printf("\033[41m\033[1m");
 
     fprintf(log_file, "[FAIL]");
@@ -274,7 +274,7 @@ int log_fail ( const char *const format, ... )
     // Restore the color.
     if ( log_with_ansi_color ) printf("\033[0m");
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the foreground color to red
     if ( log_with_ansi_color ) printf(" \033[91m");
 
     // Print the info
@@ -317,7 +317,7 @@ int log_scenario ( const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the color to cyan
     if ( log_with_ansi_color ) printf("\033[96m\033[1m\033[4m");
 
     fprintf(log_file, "Scenario: ");
@@ -362,7 +362,7 @@ int log_colorful ( enum log_color_e color, const char *const format, ... )
     // Use the varadic argument list in vprintf call
     va_start(list, format);
 
-    // Uses ANSI terminal escapes to set the color to red,
+    // Uses ANSI terminal escapes to set the color ,
     if ( log_with_ansi_color ) printf("\033[%dm", color);
 
     // Print the info

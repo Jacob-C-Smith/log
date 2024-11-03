@@ -37,8 +37,8 @@ enum log_color_e
 
 // Initializer
 /** !
- * This gets called at runtime before main. By default, log to standard out 
- * with ANSI color coding 
+ * This gets called at runtime before main. 
+ * By default, log to standard out with ANSI color coding 
  * 
  * @param void
  * 
@@ -68,14 +68,11 @@ DLLEXPORT int log_update ( const char *const path, bool ansi_color );
 /** !
  *  Log an error
  *
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
  * @sa log_warning
  * @sa log_info
- * @sa log_pass
- * @sa log_fail
- * @sa log_scenario
  *
  * @return 1 on success, 0 on error
  */
@@ -84,14 +81,11 @@ DLLEXPORT int log_error ( const char *const format, ... );
 /** !
  *  Log a warning
  *
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
  * @sa log_error
  * @sa log_info
- * @sa log_pass
- * @sa log_fail
- * @sa log_scenario
  *
  * @return 1 on success, 0 on error
  */
@@ -100,14 +94,11 @@ DLLEXPORT int log_warning ( const char *const format, ... );
 /** !
  *  Log some information
  *
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
  * @sa log_error
  * @sa log_warning
- * @sa log_pass
- * @sa log_fail
- * @sa log_scenario
  *
  * @return 1 on success, 0 on error
  */
@@ -116,14 +107,12 @@ DLLEXPORT int log_info ( const char *const format, ... );
 /** !
  *  Log a passing test
  *
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
- * @sa log_error
- * @sa log_warning
- * @sa log_info
  * @sa log_fail
  * @sa log_scenario
+ * @sa log_colorful
  *
  * @return 1 on success, 0 on error
  */
@@ -132,14 +121,12 @@ DLLEXPORT int log_pass ( const char *const format, ... );
 /** !
  *  Log a failing test
  *
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
- * @sa log_error
- * @sa log_warning
- * @sa log_info
  * @sa log_pass
  * @sa log_scenario
+ * @sa log_colorful
  *
  * @return 1 on success, 0 on error
  */
@@ -148,14 +135,13 @@ DLLEXPORT int log_fail ( const char *const format, ... );
 /** !
  *  Log a test scenario
  *
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
- * @sa log_error
- * @sa log_warning
- * @sa log_info
  * @sa log_pass
  * @sa log_fail
+ * @sa log_colorful
+
  *
  * @return 1 on success, 0 on error
  */
@@ -164,15 +150,14 @@ DLLEXPORT int log_scenario ( const char *const format, ... );
 /** !
  *  Log with user defined colors
  *
- * @param 
- * @param format : printf format parameter
- * @param ...    : Additional arguments
+ * @param  * 
+
+ * @param format printf format parameter
+ * @param ...    Additional arguments
  *
- * @sa log_error
- * @sa log_warning
- * @sa log_info
  * @sa log_pass
  * @sa log_fail
+ * @sa log_scenario
  *
  * @return 1 on success, 0 on error
  */
