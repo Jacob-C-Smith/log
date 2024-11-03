@@ -34,6 +34,10 @@ enum log_color_e
     cyan    = 36,
     gray    = 37,
 };
+ 
+// Type definitions
+/** Log function */
+typedef DLLEXPORT int (fn_log) ( void *p_parameter, void *pfn_next, const char *const foramt, ... );
 
 // Initializer
 /** !
@@ -150,8 +154,6 @@ DLLEXPORT int log_scenario ( const char *const format, ... );
 /** !
  *  Log with user defined colors
  *
- * @param  * 
-
  * @param format printf format parameter
  * @param ...    Additional arguments
  *
