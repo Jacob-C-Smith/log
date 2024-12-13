@@ -8,7 +8,8 @@ log.ico
 log_test
 .vscode/
 #CMake
-build/
+build/*
+!build/.gitkeep
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake

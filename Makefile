@@ -29,6 +29,13 @@ DEFINES = -D_GNU_SOURCE
 %.i: %.c; $(CC) -I $(CC_FLAGS) -o $(BUILD_DIRECTORY)/$@ -E $< 
 %.s: %.c; $(CC) -I $(CC_FLAGS) -o $(BUILD_DIRECTORY)/$@ -S $<
 
+all:
+	# ╭─────╮
+	# │ log │
+	# ╰─────╯
+	make log
+	make log_example
+
 log: log.o
 	# ╭─────────────╮
 	# │ log library │
@@ -36,14 +43,11 @@ log: log.o
 	$(CC) $(CC_FLAGS) $(DEFINES) -I$(INCLUDE_DIRECTORY) -shared -o $(LIBRARY_DIRECTORY)/lib$@.so $(BUILD_DIRECTORY)/$^ 
 
 log_example: main.o
-	make log
 	$(CC) -L$(LIBRARY_DIRECTORY) -Wl,-R$(LIBRARY_DIRECTORY) -llog $(CC_FLAGS) $(DEFINES) -o $(BUILD_DIRECTORY)/$@ $(BUILD_DIRECTORY)/$^ 
-	# ╭──────────────╮
-	# │ array tester │
-	# ╰──────────────╯
+	# ╭─────────────╮
+	# │ log example │
+	# ╰─────────────╯
 	$(BUILD_DIRECTORY)/$@
-
-all: log log_example
 
 clean:
 	rm -rf *.o $(LIBRARY_DIRECTORY)/* $(BUILD_DIRECTORY)/*
