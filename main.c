@@ -87,11 +87,12 @@ int main ( int argc, const char *argv[] )
     log_info("╭─────────────╮\n");
     log_info("│ log example │\n");
     log_info("╰─────────────╯\n");
-    log_info("The log library provides primitive logging functions.\n");
-    log_info("Log provides %d categories of loggingfunctions. Message logs, test logs, and colorful logs.\n\n",LOG_EXAMPLES_QUANTITY);
-    log_info("A message log is one of < info | warning | error >.\n");
-    log_info("A tester log is one of < scenario | pass | fail >.\n");
-    log_info("A colorful log is written with any ANSI color. \n\n");
+    fprintf(stderr, "The log library provides primitive logging functions.\n");
+    fprintf(stderr, "\033[03mlog\033[23m provides %d flavors. Message logs, test logs, and\n", LOG_EXAMPLES_QUANTITY);
+    fprintf(stderr, "colorful logs.\n\n");
+    fprintf(stderr, "A \033[03mmessage log\033[23m is one of < \033[94;03minfo\033[00;23m | \033[93;03mwarning\033[00;23m | \033[91;03merror\033[00;23m >.\n");
+    fprintf(stderr, "A \033[03mtester log\033[23m is one of < \033[96m\033[1m\033[4mScenario:\033[0m | \033[42;1m[PASS]\033[0m | \033[41;1m[FAIL]\033[0m >.\n");
+    fprintf(stderr, "A \033[03mcolorful log\033[23m is written with \033[03many ANSI color\033[23m. \n\n");
 
     //////////////////////
     // Run the examples //
@@ -238,7 +239,7 @@ int log_message_example ( int argc, const char *argv[] )
     log_info("╭─────────────────╮\n");
     log_info("│ message example │\n");
     log_info("╰─────────────────╯\n");
-    log_info("This example prints an error, a warning, and an info message\n\n");
+    fprintf(stderr, "This example prints an \033[03;91merror\033[00;23m, a \033[03;93mwarning\033[23;00m, and an \033[03;94minfo\033[00;23m message\n\n");
 
     // Log an error
     log_error("[ERROR] This is an error\n");
@@ -250,7 +251,7 @@ int log_message_example ( int argc, const char *argv[] )
     log_info("[INFO] This is some info\n");
     
     // Example formatting
-    putchar('\n');
+    putc('\n', stderr);
 
     // Success
     return 1;
@@ -270,7 +271,7 @@ int log_tester_example ( int argc, const char *argv[] )
     log_info("╭────────────────╮\n");
     log_info("│ tester example │\n");
     log_info("╰────────────────╯\n");
-    log_info("This example prints a scenario header, a pass, and a fail.\n\n");
+    fprintf(stderr, "This example prints a scenario header, a pass, and a fail.\n\n");
 
     // Log a scenario
     log_scenario("This is a test scenario\n");
@@ -282,7 +283,7 @@ int log_tester_example ( int argc, const char *argv[] )
     log_fail("This is a failing test\n");
 
     // Formatting
-    putchar('\n');
+    putc('\n', stderr);
     
     // Success
     return 1;
@@ -302,7 +303,7 @@ int log_colorful_example ( int argc, const char *argv[] )
     log_info("╭──────────────────╮\n");
     log_info("│ colorful example │\n");
     log_info("╰──────────────────╯\n");
-    log_info("This example prints many logs in different ANSI colors.\n\n");
+    fprintf(stderr, "This example prints many logs in different ANSI colors.\n\n");
 
     // Log with colors
     log_colorful(black  , "Hello, World!\n");
