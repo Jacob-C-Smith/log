@@ -20,14 +20,14 @@ void log_init ( void )
     // State check
     if ( initialized == true ) return;
 
-    // Log to standard out
-    log_file = stdout;
+    // Log to standard error
+    log_file = stderr;
     
     // ANSI color flag
     log_with_ansi_color = true;
     
-    // Flush standard out
-    fflush(stdout);
+    // Flush standard error
+    fflush(stderr);
 
     // Set the initialized flag
     initialized = true;
@@ -40,7 +40,7 @@ int log_update ( const char *const path, bool ansi_color )
 {
 
     // Argument check
-    if ( path == (void *) 0 ) goto log_on_standard_out;
+    if ( path == (void *) 0 ) goto log_on_standard_err;
 
     // Open the file 
     log_file = fopen(path, "w+");
@@ -51,16 +51,16 @@ int log_update ( const char *const path, bool ansi_color )
     // Success
     return 1;
 
-    log_on_standard_out:
+    log_on_standard_err:
         
-        // Log to standard out
-        log_file = stdout;
+        // Log to standard err
+        log_file = stderr;
         
         // ANSI color flag
         log_with_ansi_color = ansi_color;
         
-        // Flush standard out
-        fflush(stdout);
+        // Flush standard err
+        fflush(stderr);
 
         // Success
         return 1;
@@ -87,13 +87,13 @@ int log_error ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to red
-    if ( log_with_ansi_color ) printf("\033[91m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[91m");
     
     // Print the error
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
@@ -130,13 +130,13 @@ int log_warning ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to yellow
-    if ( log_with_ansi_color ) printf("\033[93m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[93m");
     
     // Print the warning
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
@@ -173,13 +173,13 @@ int log_info ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to light blue,
-    if ( log_with_ansi_color ) printf("\033[94m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[94m");
     
     // Print the info
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
@@ -216,21 +216,21 @@ int log_pass ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to green
-    if ( log_with_ansi_color ) printf("\033[42m\033[1m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[42m\033[1m");
 
     fprintf(log_file, "[PASS]");
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Uses ANSI terminal escapes to set the color to green
-    if ( log_with_ansi_color ) printf(" \033[92m");
+    if ( log_with_ansi_color ) fprintf(stderr, " \033[92m");
     
     // Print the info
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
@@ -267,21 +267,21 @@ int log_fail ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the background color to red 
-    if ( log_with_ansi_color ) printf("\033[41m\033[1m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[41m\033[1m");
 
     fprintf(log_file, "[FAIL]");
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Uses ANSI terminal escapes to set the foreground color to red
-    if ( log_with_ansi_color ) printf(" \033[91m");
+    if ( log_with_ansi_color ) fprintf(stderr, " \033[91m");
 
     // Print the info
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
@@ -318,7 +318,7 @@ int log_scenario ( const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color to cyan
-    if ( log_with_ansi_color ) printf("\033[96m\033[1m\033[4m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[96m\033[1m\033[4m");
 
     fprintf(log_file, "Scenario: ");
 
@@ -326,7 +326,7 @@ int log_scenario ( const char *const format, ... )
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
@@ -363,13 +363,13 @@ int log_colorful ( enum log_color_e color, const char *const format, ... )
     va_start(list, format);
 
     // Uses ANSI terminal escapes to set the color ,
-    if ( log_with_ansi_color ) printf("\033[%dm", color);
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[%dm", color);
 
     // Print the info
     vfprintf(log_file, format, list);
 
     // Restore the color.
-    if ( log_with_ansi_color ) printf("\033[0m");
+    if ( log_with_ansi_color ) fprintf(stderr, "\033[0m");
 
     // Done with variadic list
     va_end(list);
