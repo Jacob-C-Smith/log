@@ -20,9 +20,10 @@ jobs:
         git submodule update --remote
     - name: Build
       run: |
+        cd ${{github.workspace}}
         make all
     - name: Test
       working-directory: build
       run: |
-        build/log_example
+        cd ${{github.workspace}}/build && ./build/log_example
 
