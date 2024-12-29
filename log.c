@@ -1,5 +1,5 @@
 /** !
- * log library
+ * log library - source
  *
  * @file log.c
  *
@@ -51,29 +51,33 @@ int log_update ( const char *const path, bool ansi_color )
     // Success
     return 1;
 
-    log_on_standard_err:
-        
-        // Log to standard err
-        log_file = stderr;
-        
-        // ANSI color flag
-        log_with_ansi_color = ansi_color;
-        
-        // Flush standard err
-        fflush(stderr);
+    // Error handling
+    {
+        log_on_standard_err:
+            
+            // Log to standard err
+            log_file = stderr;
+            
+            // ANSI color flag
+            log_with_ansi_color = ansi_color;
+            
+            // Flush standard err
+            fflush(stderr);
 
-        // Success
-        return 1;
+            // Success
+            return 1;
 
-    no_log_file:
-        #ifndef NDEBUG
-            printf("[log] Failed to open file \"%s\" in call to function \"%s\"\n", path, __FUNCTION__);
-        #endif
+        no_log_file:
+            #ifndef NDEBUG
+                printf("[log] Failed to open file \"%s\" in call to function \"%s\"\n", path, __FUNCTION__);
+            #endif
 
-        // Error
-        return 0;
+            // Error
+            return 0;
+    }
 }
 
+#ifndef LOG_BUILD_NO_MESSAGES
 int log_error ( const char *const format, ... )
 {
 
@@ -202,7 +206,9 @@ int log_info ( const char *const format, ... )
         }
     }
 }
+#endif
 
+#ifndef LOG_BUILD_NO_TESTER
 int log_pass ( const char *const format, ... )
 {
 
@@ -349,7 +355,9 @@ int log_scenario ( const char *const format, ... )
         }
     }
 }
+#endif
 
+#ifndef LOG_BUILD_NO_COLORFUL
 int log_colorful ( enum log_color_e color, const char *const format, ... )
 {
     
@@ -392,7 +400,7 @@ int log_colorful ( enum log_color_e color, const char *const format, ... )
         }
     }
 }
-
+#endif
 
 void log_exit ( void )
 {

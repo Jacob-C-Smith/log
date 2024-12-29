@@ -1,5 +1,5 @@
 ﻿/** !
- * Include header for log library
+ * log library - header
  * 
  * @file log/log.h 
  * 
@@ -16,13 +16,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-// Platform dependent macros
-#ifdef _WIN64
-#define DLLEXPORT extern __declspec(dllexport)
-#else
-#define DLLEXPORT
-#endif
-
+// Enumeration definitions
 enum log_color_e
 {
     black   = 30,
@@ -34,11 +28,8 @@ enum log_color_e
     cyan    = 36,
     gray    = 37,
 };
- 
-// Type definitions
-/** Log function */
-typedef DLLEXPORT int (fn_log) ( void *p_parameter, void *pfn_next, const char *const foramt, ... );
 
+// Function declarations
 // Initializer
 /** !
  * This gets called at runtime before main. 
@@ -48,11 +39,11 @@ typedef DLLEXPORT int (fn_log) ( void *p_parameter, void *pfn_next, const char *
  * 
  * @return void
  */
-DLLEXPORT void log_init ( void ) __attribute__((constructor));
+void log_init ( void ) __attribute__((constructor));
 
 // State
 /** !
- *  Update the log file and color coding flag
+ * Update the log file and color coding flag
  *
  * @param path       path to the log file if not null pointer else log to standard out
  * @param ansi_color color coded logs if true else plain
@@ -66,11 +57,11 @@ DLLEXPORT void log_init ( void ) __attribute__((constructor));
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_update ( const char *const path, bool ansi_color );
+int log_update ( const char *const path, bool ansi_color );
 
 // Debug logging
 /** !
- *  Log an error
+ * Log an error
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
@@ -80,10 +71,10 @@ DLLEXPORT int log_update ( const char *const path, bool ansi_color );
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_error ( const char *const format, ... );
+int log_error ( const char *const format, ... );
 
 /** !
- *  Log a warning
+ * Log a warning
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
@@ -93,10 +84,10 @@ DLLEXPORT int log_error ( const char *const format, ... );
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_warning ( const char *const format, ... );
+int log_warning ( const char *const format, ... );
 
 /** !
- *  Log some information
+ * Log some information
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
@@ -106,10 +97,10 @@ DLLEXPORT int log_warning ( const char *const format, ... );
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_info ( const char *const format, ... );
+int log_info ( const char *const format, ... );
 
 /** !
- *  Log a passing test
+ * Log a passing test
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
@@ -120,10 +111,10 @@ DLLEXPORT int log_info ( const char *const format, ... );
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_pass ( const char *const format, ... );
+int log_pass ( const char *const format, ... );
 
 /** !
- *  Log a failing test
+ * Log a failing test
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
@@ -134,10 +125,10 @@ DLLEXPORT int log_pass ( const char *const format, ... );
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_fail ( const char *const format, ... );
+int log_fail ( const char *const format, ... );
 
 /** !
- *  Log a test scenario
+ * Log a test scenario
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
@@ -145,25 +136,20 @@ DLLEXPORT int log_fail ( const char *const format, ... );
  * @sa log_pass
  * @sa log_fail
  * @sa log_colorful
-
  *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_scenario ( const char *const format, ... );
+int log_scenario ( const char *const format, ... );
 
 /** !
- *  Log with user defined colors
+ * Log with user defined colors
  *
  * @param format printf format parameter
  * @param ...    Additional arguments
  *
- * @sa log_pass
- * @sa log_fail
- * @sa log_scenario
- *
  * @return 1 on success, 0 on error
  */
-DLLEXPORT int log_colorful ( enum log_color_e color, const char *const format, ... );
+int log_colorful ( enum log_color_e color, const char *const format, ... );
 
 // Cleanup
 /** !
@@ -173,4 +159,4 @@ DLLEXPORT int log_colorful ( enum log_color_e color, const char *const format, .
  * 
  * @return void
  */
-DLLEXPORT void log_exit ( void ) __attribute__((destructor));
+void log_exit ( void ) __attribute__((destructor));
