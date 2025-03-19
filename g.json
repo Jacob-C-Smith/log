@@ -1,0 +1,10 @@
+{
+    "name"        : "log",
+    "group"       : "Primitives",
+    "description" : "Log errors, warnings, and information with pretty printing",
+    "repository"  : "https://github.com/Jacob-C-Smith/log",
+    "icon"        : "https://icons.g10.app/log-light.png",
+    "tested"      : "dc",
+    "thread safe" : true,
+    "demo"        : "https://codespaces.new/Jacob-C-Smith/log?quickstart=1"
+}
